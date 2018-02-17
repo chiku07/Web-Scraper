@@ -1,8 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
+import NavigableString
 
-url="https://www.yellowpages.com/los-angeles-ca/coffee-shops"
-r=request.get(url)
+url="https://www.yellowpageskolkata.com/cat_h/h_Hotels.html"
+r=requests.get(url)
 
 soup = BeautifulSoup(r.content)
 
@@ -13,11 +14,12 @@ for link in links:
 		print "<a href='%s'>'%s'</a>" %(link.get("href"),link.text)
 
 
-g_data = soup.find_all("div",{"class":"info-section info-secondary"})
+g_data = soup.find_all("div",{"align":"right"})
 
 
 for item in g_data:
-	print item.text
+	print item.contents[0].find_all("a",{"color":"#575757"})
+#print item.contents[1]
 
 	
 
